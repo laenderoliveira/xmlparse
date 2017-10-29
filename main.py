@@ -2,10 +2,11 @@ from bs4 import BeautifulSoup as bs
 from requests import get
 
 # Super Lima LTDA-ME
+
 BASE = "https://nfstock.alterdata.com.br"
 
 
-def get_xml(keynfe):
+def get_xml(keynfe): # Baixa XML
     response = get(f"{BASE}/Consulta/laender/Consulta/Buscar?chave={keynfe}")
     soup = bs(response.text, "html.parser")
     href = soup.find("a").attrs["href"]
@@ -13,7 +14,7 @@ def get_xml(keynfe):
     return response.text
 
 
-def parse_xml(xmlnfe):
+def parse_xml(xmlnfe): # Parseia XML
     clear = ["pRedBC", "vBC", "pICMS", "vICMS"]  # Fields to clear
     soup = bs(xmlnfe, "xml")
     for tag in clear:
