@@ -11,3 +11,12 @@ def get_xml(keynfe):
     href = soup.find("a").attrs["href"]
     response = get(f"{BASE}{href}")
     return response.text
+
+
+def parse_xml(xmlnfe):
+    clear = ["pRedBC", "vBC", "pICMS", "vICMS"]  # Fields to clear
+    soup = bs(xmlnfe, "xml")
+    for tag in clear:
+        for value in soup.findAll(tag):
+            value.string = "0"
+    return str(soup.nfeProc)
