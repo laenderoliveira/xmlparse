@@ -28,3 +28,9 @@ while True:
         path = "importacao/"
         with open(f"{path}{key}.xml", "w", encoding="utf-8") as file:
             file.write(xml)
+        status = "BAIXADO"
+    elif key == "0":
+        break
+    else:
+        status = "ERRO - Chave inválida"
+    print(f"[{status}] {key}.xml")
