@@ -20,3 +20,11 @@ def parse_xml(xmlnfe):
         for value in soup.findAll(tag):
             value.string = "0"
     return str(soup.nfeProc)
+
+while True:
+    key = input("Digite a chave da NF-e: (0 para sair)")
+    if len(key) == 44:
+        xml = parse_xml(get_xml(key))
+        path = "importacao/"
+        with open(f"{path}{key}.xml", "w", encoding="utf-8") as file:
+            file.write(xml)
